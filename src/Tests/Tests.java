@@ -34,6 +34,23 @@ public class Tests {
 		} else {
 			System.out.println("Nom inexistant");
 		}
+		
+		assertEquals(true, clientCorrect);
+		// fin test pour true
+		
+		
+		// test pour false
+		Facture.tabClients[0] = "allo5aulo";
+		
+		for (int i = 0; i < Facture.tabClients.length; i++) {
+			if (client == Facture.tabClients[i]){
+				clientCorrect = true;
+			} else {
+				clientCorrect = false;
+			}
+		}
+		
+		assertEquals(false, clientCorrect);
 	}
 	
 	//Agustin
