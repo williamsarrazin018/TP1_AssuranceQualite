@@ -20,11 +20,11 @@ public class Facture {
 	
 	private static final double TPS = 0.05;
 	private static final double TVQ = 0.0975;
-	private static int cptLignes = 0;
-	private static int cptErreurs = 0;
-	private static int cptClient = 0;
-	private static int cptPlat = 0;
-	private static int cptCommande = 0;
+	private int cptLignes = 0;
+	private int cptErreurs = 0;
+	private int cptClient = 0;
+	private int cptPlat = 0;
+	private int cptCommande = 0;
 	private String[] lignesFactures = new String[20];
 
 	public Facture() {
@@ -147,8 +147,6 @@ public class Facture {
 						boolean nomTrouve = false;
 						boolean platTrouve = false;
 						boolean qteOK = true;
-						boolean fini = false;
-						
 						
 						String[] commande = ligneCourrante.split(" ");
 						if (commande.length != 3) {
