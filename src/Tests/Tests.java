@@ -37,44 +37,85 @@ public class Tests {
 	}
 	
 	//Agustin
-		@Test
-			public void verifierPlatTest() {
-				Plat plat = new Plat(12,"platTest22");
-				String nomTest= "platTest22";
-				plat.setNom(nomTest);
-				Plat plat1 = new Plat(12,"platTEst");
-				Plat plat2 = new Plat(12,"platTest22");
-				
-				plat2.setNom("platTest22");
-			
-				Facture.tabPlats[0] = plat1;
-				Facture.tabPlats[1] = plat2;
-				boolean nomPlat = false;
-				Plat test = new Plat(12,"platTest 22");
-				
-				for (int i = 0; i < 2 ; i++) {
-
-					if ( plat.getNom() == Facture.tabPlats[i].getNom() ){
-						nomPlat = true;	
-						test.setNom("platTest22");
-						
-					}
+			@Test
+				public void verifierPlatTest() {
+					Plat plat = new Plat(12,"platTest22");
+					String nomTest= "platTest22";
+					plat.setNom(nomTest);
+					Plat plat1 = new Plat(12,"platTEst");
+					Plat plat2 = new Plat(12,"platTest22");
 					
-					if(nomPlat == true){
-						String[]tabPlat = plat.getNom().split(" ");
-						if (tabPlat.length > 2){
-							System.out.println("Probleme avec espace");//pour test
-							nomPlat = false;
+					plat2.setNom("platTest22");
+				
+					Facture.tabPlats[0] = plat1;
+					Facture.tabPlats[1] = plat2;
+					boolean nomPlat = false;
+					Plat test = new Plat(12,"platTest 22");
+					
+					for (int i = 0; i < 2 ; i++) {
+
+						if ( plat.getNom() == Facture.tabPlats[i].getNom() ){
+							nomPlat = true;	
+							test.setNom("platTest22");
+							
+						}
+						
+						if(nomPlat == true){
+							String[]tabPlat = plat.getNom().split(" ");
+							if (tabPlat.length > 2){
+								System.out.println("Probleme avec espace");//pour test
+								nomPlat = false;
+							}
+							
 						}
 						
 					}
 					
-				}
+					assertEquals(Facture.tabPlats[1].getNom(), test.getNom());
 				
-				assertEquals(Facture.tabPlats[1].getNom(), test.getNom());
+				
+				}
 			
 			
-			}
+			//Agustin
+			@Test
+				public void verifierPlatTestFalse() {
+					Plat plat = new Plat(12,"platTest22");
+					String nomTest= "platTest22";
+					plat.setNom(nomTest);
+					Plat plat1 = new Plat(12,"platT Est");
+					Plat plat2 = new Plat(12,"platTest2 2");
+					
+					
+				
+					Facture.tabPlats[0] = plat1;
+					Facture.tabPlats[1] = plat2;
+					boolean nomPlat = false;
+					Plat test = new Plat(12,"platTest 22");
+					
+					for (int i = 0; i < 2 ; i++) {
+
+						if ( plat.getNom() == Facture.tabPlats[i].getNom() ){
+							nomPlat = true;	
+							test.setNom("platTest22");
+							
+						}
+						
+						if(nomPlat == true){
+							String[]tabPlat = plat.getNom().split(" ");
+							if (tabPlat.length > 2){
+								System.out.println("Probleme avec espace");//pour test
+								nomPlat = false;
+							}
+							
+						}
+						
+					}
+					
+					assertEquals(false, nomPlat);
+				
+				
+				}
 	
 		//Agustin
 				@Test
