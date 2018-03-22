@@ -61,7 +61,7 @@ public class Tests {
 					plat.setNom(nomTest);
 					Plat plat1 = new Plat(12,"platTEst");
 					Plat plat2 = new Plat(12,"platTest22");
-					
+					int nbPlatsAjout = 2;
 					plat2.setNom("platTest22");
 				
 					Facture.tabPlats[0] = plat1;
@@ -69,7 +69,7 @@ public class Tests {
 					boolean nomPlat = false;
 					Plat test = new Plat(12,"platTest 22");
 					
-					for (int i = 0; i < 2 ; i++) {
+					for (int i = 0; i < nbPlatsAjout ; i++) {
 
 						if ( plat.getNom() == Facture.tabPlats[i].getNom() ){
 							nomPlat = true;	
@@ -79,7 +79,7 @@ public class Tests {
 						
 						if(nomPlat == true){
 							String[]tabPlat = plat.getNom().split(" ");
-							if (tabPlat.length > 2){
+							if (tabPlat.length > nbPlatsAjout){
 								System.out.println("Probleme avec espace");//pour test
 								nomPlat = false;
 							}
@@ -100,6 +100,7 @@ public class Tests {
 					Plat plat = new Plat(12,"platTest22");
 					String nomTest= "platTest22";
 					plat.setNom(nomTest);
+					int nbPlatsAjout = 2;
 					Plat plat1 = new Plat(12,"platT Est");
 					Plat plat2 = new Plat(12,"platTest2 2");
 					
@@ -110,7 +111,7 @@ public class Tests {
 					boolean nomPlat = false;
 					Plat test = new Plat(12,"platTest 22");
 					
-					for (int i = 0; i < 2 ; i++) {
+					for (int i = 0; i < nbPlatsAjout ; i++) {
 
 						if ( plat.getNom() == Facture.tabPlats[i].getNom() ){
 							nomPlat = true;	
@@ -120,7 +121,7 @@ public class Tests {
 						
 						if(nomPlat == true){
 							String[]tabPlat = plat.getNom().split(" ");
-							if (tabPlat.length > 2){
+							if (tabPlat.length > nbPlatsAjout){
 								System.out.println("Probleme avec espace");//pour test
 								nomPlat = false;
 							}
@@ -206,6 +207,7 @@ public class Tests {
 		facture5.gererCommandes(fichierTest);
 		
 		facture5.lignesFacture();
+		
 		
 		
 		String[] tabLignesExpected = new String[20];
