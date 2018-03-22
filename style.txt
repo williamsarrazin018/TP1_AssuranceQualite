@@ -1,0 +1,8 @@
+Agustin Torres et William Sarrazin
+
+Normes
+1.Commencer les variables par des minuscules.
+2.Pour avoir une donnée d'un objet, appelé la methode GET
+3.Pour modifier une donnée d'un objet, appelé la methode SET
+4.Utiliser des noms significatifs pour les variables.
+5.Variables globales en majuscule.

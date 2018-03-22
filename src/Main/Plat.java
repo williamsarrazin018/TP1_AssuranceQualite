@@ -1,3 +1,4 @@
+package Main;
 
 public class Plat {
 	private double prix;

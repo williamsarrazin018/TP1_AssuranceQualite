@@ -1,0 +1,20 @@
+Agustin Torres :
+
+Spécifications :
+
+------------------------------------------------------------------------------
+
+Gestion des commandes incorrectes
+
+-Méthode verifierClients()
+	-Permet de vérifier si le client existe.
+	-Vérifie le format du client.
+
+-Méthode verifierPlat()
+	-Vérifier le nom du plat
+	-Vérifier le format du plat
+	-Vérifie  si les prix sont correct
+
+-Méthode verifierCommande()
+	-Vérifie si le format de la commande est correct+6
+zy

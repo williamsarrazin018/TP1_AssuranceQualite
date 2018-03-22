@@ -1,0 +1,13 @@
+Clients:
+Céline
+Steeve
+Plats:
+Poutine 10.5
+Frites 2.5
+Repas_Poulet 15.75
+Commandes:
+Céline Frites 2
+Céline Repas_Poulet 1
+Steeve Frites 1
+Steeve Frites -1
+Fin
