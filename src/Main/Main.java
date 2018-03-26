@@ -24,7 +24,7 @@ public class Main {
 		facture.gererCommandes(fichier);
 		facture.lignesFacture();
 		facture.ecrireFacture();
-
+		facture.factureTable();
 	}
 		
 		

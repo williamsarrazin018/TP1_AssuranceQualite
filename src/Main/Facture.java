@@ -25,11 +25,88 @@ public class Facture {
 	private int cptClient = 0;
 	private int cptPlat = 0;
 	private int cptCommande = 0;
+	private int cptTable = 0;
+	private int[] tabTables = new int[20];
 	private String[] lignesFactures = new String[20];
 
 	public Facture() {
 		
 		
+	}
+	
+	public void factureTable() {
+
+		cptLignes = 0;
+
+		for (int j = 0; j < tabErreurs.length; j++) {
+			if (tabErreurs[j] != null) {
+				lignesFactures[cptLignes] = tabErreurs[j];
+				cptLignes++;
+			}
+		}
+		
+		
+		// Faire les factures
+		
+		for (int i = 0; i < tabTables.length; i++) {
+			if (tabTables[i] != 0) {
+				System.out.println("Table" + tabTables[i]);
+				for (int j = 0; j < tabCommandes.length; j++) {
+					if (tabCommandes[j] != null) {
+						if (tabCommandes[j].getNoTable() == tabTables[i]) {
+							System.out.println(tabCommandes[j].getNomClient());
+							int prix = 0;
+							for (int k = 0; k < tabCommandes.length; k++) {
+								if (tabCommandes[k].getNomClient() == tabCommandes[i].getNomClient()) {
+									prix += tabCommandes[k].get
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+//		for (int i = 0; i < cptClient; i++) {
+//
+//			double prix = 0;
+//
+//			for (int j = 0; j < cptCommande; j++) {
+//
+//				if (tabClients[i].equals(tabCommandes[j].getNomClient())) {
+//
+//					boolean trouve = false;
+//
+//					for (int k = 0; k <= cptPlat && !trouve; k++) {
+//
+//						if (tabPlats[k].getNom().equals(
+//								tabCommandes[j].getNomPlat())) {
+//
+//							prix += tabPlats[k].getPrix()
+//									* tabCommandes[j].getQte()
+//									+ (tabPlats[k].getPrix() * tabCommandes[j]
+//											.getQte()) * (TPS + TVQ);
+//							trouve = true;
+//
+//						} else {
+//
+//							prix += 0;
+//
+//						}
+//					}
+//
+//				}
+//
+//			}
+//
+//			if (prix > 0) {
+//				getLignesFactures()[cptLignes] = tabClients[i] + " "
+//						+ (Math.round(prix * 100.0) / 100.0) + "$";
+//				cptLignes++;
+//
+//			}
+//
+//		}
+
 	}
 	
 	public void lignesFacture() {
@@ -149,12 +226,12 @@ public class Facture {
 						boolean qteOK = true;
 						
 						String[] commande = ligneCourrante.split(" ");
-						if (commande.length != 3) {
+						if (commande.length != 4) {
 							throw new Exception("Format de commande invalide");
 						} else {
 
 							Commande commandeTmp = new Commande(commande[0],
-									commande[1], Integer.parseInt(commande[2]));
+									commande[1], Integer.parseInt(commande[2]), Integer.parseInt(commande[3]));
 							
 							//Nom valide
 							for (int i = 0; i < cptClient  && !nomTrouve; i++) {
@@ -179,17 +256,32 @@ public class Facture {
 								qteOK = false;
 							}
 							
-							if (nomTrouve && platTrouve && qteOK && qteOK) {
+							if (nomTrouve && platTrouve && qteOK) {
 								tabCommandes[cptCommande] = commandeTmp;
+								
+								boolean tableExistante = false;
+								
+								for (int i = 0; i < tabTables.length; i++) {
+									if (commandeTmp.getNoTable() == tabTables[i]) {
+										tableExistante = true;
+									}
+								}
+								
+								if (!tableExistante) {
+									tabTables[cptTable] = commandeTmp.getNoTable();
+									cptTable++;
+								}
+								
+								
 								cptCommande++;
 							} else if (!nomTrouve){
-								tabErreurs[cptErreurs] = "Erreur nom introuvé : " + ligneCourrante;
+								tabErreurs[cptErreurs] = "Table#" + commande[3] + " - Erreur nom introuvé : " + ligneCourrante;
 								cptErreurs++;
 							} else if (!platTrouve) {
-								tabErreurs[cptErreurs] = "Erreur plat introuvé : " + ligneCourrante;
+								tabErreurs[cptErreurs] = "Table#" + commande[3] + " - Erreur plat introuvé : " + ligneCourrante;
 								cptErreurs++;
 							} else if (!qteOK) {
-								tabErreurs[cptErreurs] = "Erreur quantité invalide : " + ligneCourrante;
+								tabErreurs[cptErreurs] = "Table#" + commande[3] + " - Erreur quantité invalide : " + ligneCourrante;
 								cptErreurs++;
 							}
 
@@ -305,6 +397,20 @@ public class Facture {
             } catch (Exception e) {
             }
         }
+		
+	}
+	
+	public double trouverPrixPlat( String nomPlat){
+		double prix = 0;
+		for (int i = 0; i < tabPlats.length; i++) {
+			if (tabPlats[i] != null) {
+				if (tabPlats[i].getNom() == nomPlat) {
+					prix = tabPlats[i].getPrix();
+				}
+			}
+		}
+		
+		return prix;
 		
 	}
 	

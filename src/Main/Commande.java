@@ -5,12 +5,13 @@ public class Commande {
 	private String nomClient;
 	private String nomPlat;
 	private int qte;
+	private int noTable;
 	
-	public Commande (String nomClient,String nomPlat,int qte){
+	public Commande (String nomClient,String nomPlat,int qte, int noTable){
 		this.nomClient = nomClient;
 		this.nomPlat = nomPlat;
 		this.qte = qte;
-		
+		this.noTable = noTable;
 	}
 	
 	public void setNomclient(String nom){
@@ -35,5 +36,13 @@ public class Commande {
 	
 	public int getQte(){
 		return this.qte;
+	}
+
+	public int getNoTable() {
+		return noTable;
+	}
+
+	public void setNoTable(int noTable) {
+		this.noTable = noTable;
 	}
 }
