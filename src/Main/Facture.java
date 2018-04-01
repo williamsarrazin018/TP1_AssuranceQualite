@@ -34,80 +34,7 @@ public class Facture {
 		
 	}
 	
-	public void factureTable() {
-
-		cptLignes = 0;
-
-		for (int j = 0; j < tabErreurs.length; j++) {
-			if (tabErreurs[j] != null) {
-				lignesFactures[cptLignes] = tabErreurs[j];
-				cptLignes++;
-			}
-		}
-		
-		
-		for (int h = 0; h < tabTables.length; h++) {
-			if (tabTables[h] != 0) {
-				double total = 0;
-				int nbClientsTable = 0;
-				lignesFactures[cptLignes] = "Table " + tabTables[h];
-				cptLignes++;
-				for (int i = 0; i < cptClient; i++) {
-					
-					double prix = 0;
-					double prixTotalClient = 0;
-					
-					for (int j = 0; j < cptCommande; j++) {
-
-						if (tabCommandes[j].getNoTable() == tabTables[h]) {
-							if (tabClients[i].equals(tabCommandes[j].getNomClient())) {
-								nbClientsTable++;
-
-
-								prix = trouverPrixPlat(tabCommandes[j].getNomPlat())
-										* tabCommandes[j].getQte();
-								prixTotalClient += trouverPrixPlat(tabCommandes[j].getNomPlat())
-										* tabCommandes[j].getQte();
-								total += prix;
-
-							}
-						}
-						
-						
-
-					}
-
-					
-					if (prix > 0) {
-						
-						getLignesFactures()[cptLignes] = tabClients[i] + " "
-								+ (Math.round(prixTotalClient * 100.0) / 100.0) + "$";
-						
-						cptLignes++;
-						
-
-					}
-
-				}
-				
-				if (total > 100 || nbClientsTable >= 3) {
-					total += (total * 0.15) + (total * TPS) + (total * TVQ);
-					lignesFactures[cptLignes] = "Total : " + (Math.round(total * 100.0) / 100.0) + "$";
-					cptLignes++;
-
-				} else {
-					
-					total += (total * TPS) + (total * TVQ);
-					lignesFactures[cptLignes] = "Total : " + (Math.round(total * 100.0) / 100.0) + "$";
-					cptLignes++;
-					
-				}
-			}
-			
-		}
-		
-		
-	}
+	
 	
 	public void lignesFacture() {
 		
@@ -297,13 +224,13 @@ public class Facture {
 								
 								cptCommande++;
 							} else if (!nomTrouve){
-								tabErreurs[cptErreurs] = "Table#" + commande[3] + " - Erreur nom introuvé : " + ligneCourrante;
+								tabErreurs[cptErreurs] = "Erreur nom introuvé : " + ligneCourrante;
 								cptErreurs++;
 							} else if (!platTrouve) {
-								tabErreurs[cptErreurs] = "Table#" + commande[3] + " - Erreur plat introuvé : " + ligneCourrante;
+								tabErreurs[cptErreurs] = "Erreur plat introuvé : " + ligneCourrante;
 								cptErreurs++;
 							} else if (!qteOK) {
-								tabErreurs[cptErreurs] = "Table#" + commande[3] + " - Erreur quantité invalide : " + ligneCourrante;
+								tabErreurs[cptErreurs] = "Erreur quantité invalide : " + ligneCourrante;
 								cptErreurs++;
 							}
 

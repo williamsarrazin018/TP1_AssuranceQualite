@@ -79,7 +79,7 @@ public class Tests {
 		//Agustin
 				@Test
 				public void verifierCommandeTest() {
-					Commande com = new Commande("Roger","Poutine",2);
+					Commande com = new Commande("Roger","Poutine",2, 2);
 					int qte = 2;
 					String nom = "Roger";
 					
@@ -104,7 +104,9 @@ public class Tests {
 		facture1.lignesFacture();
 		
 		String[] tabLignesExpected = new String[20];
-		tabLignesExpected[0] = "Céline 18.07$";
+		tabLignesExpected[0] = "Table 1";
+		tabLignesExpected[1] = "Céline 15.75$";
+		tabLignesExpected[2] = "Total : 18.07$";
 		
 		assertEquals(tabLignesExpected, facture1.getLignesFactures());
 		
@@ -125,9 +127,13 @@ public class Tests {
 		facture2.lignesFacture();
 		
 		String[] tabLignesExpected = new String[20];
-		tabLignesExpected[0] = "Céline 18.07$";
-		tabLignesExpected[1] = "Steeve 5.74$";
-		tabLignesExpected[2] = "William 14.92$";
+		tabLignesExpected[0] = "Table 1";
+		tabLignesExpected[1] = "Céline 15.75$";
+		tabLignesExpected[2] = "William 13.0$";
+		tabLignesExpected[3] = "Total : 37.3$";
+		tabLignesExpected[4] = "Table 2";
+		tabLignesExpected[5] = "Steeve 5.0$";
+		tabLignesExpected[6] = "Total : 5.74$";
 		
 
 		assertEquals(tabLignesExpected, facture2.getLignesFactures());
@@ -151,9 +157,11 @@ public class Tests {
 		
 		
 		String[] tabLignesExpected = new String[20];
-		tabLignesExpected[0] = "Erreur quantité invalide : Steeve Frites -1";
-		tabLignesExpected[1] = "Céline 23.81$";
-		tabLignesExpected[2] = "Steeve 2.87$";
+		tabLignesExpected[0] = "Erreur quantité invalide : Steeve Frites -1 2";
+		tabLignesExpected[1] = "Table 2";
+		tabLignesExpected[2] = "Céline 20.75$";
+		tabLignesExpected[3] = "Total : 23.81$";
+		
 		
 		assertEquals(tabLignesExpected, facture5.getLignesFactures());
 		

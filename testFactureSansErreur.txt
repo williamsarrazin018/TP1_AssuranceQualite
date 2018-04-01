@@ -7,8 +7,8 @@ Poutine 10.5
 Frites 2.5
 Repas_Poulet 15.75
 Commandes:
-Céline Repas_Poulet 1
-Steeve Frites 2
-William Poutine 1
-William Frites 1
+Céline Repas_Poulet 1 1
+Steeve Frites 2 2
+William Poutine 1 1
+William Frites 1 1
 Fin

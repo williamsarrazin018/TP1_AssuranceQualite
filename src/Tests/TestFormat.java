@@ -23,10 +23,10 @@ public class TestFormat {
 		facture4.lignesFacture();
 		
 		String[] tabLignesExpected = new String[20];
-		tabLignesExpected[0] = "Erreur de format : Céline t Frites 2";
-		tabLignesExpected[1] = "Erreur de format : Céline t Repas_Poulet 1";
-		tabLignesExpected[2] = "Roger 12.05$";
-		
+		tabLignesExpected[0] = "Erreur de format : Roger Poutine 1";
+		tabLignesExpected[1] = "Erreur de format : Céline t Frites 2";
+		tabLignesExpected[2] = "Erreur de format : Céline Repas_Poulet 1";
+	
 		assertEquals(tabLignesExpected, facture4.getLignesFactures());
 		
 		
