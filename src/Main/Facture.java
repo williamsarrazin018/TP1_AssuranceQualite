@@ -52,7 +52,6 @@ public class Facture {
 				int nbClientsTable = 0;
 				lignesFactures[cptLignes] = "Table " + tabTables[h];
 				cptLignes++;
-				System.out.println("Table " + tabTables[h]);
 				for (int i = 0; i < cptClient; i++) {
 					
 					double prix = 0;
@@ -83,7 +82,6 @@ public class Facture {
 						
 						getLignesFactures()[cptLignes] = tabClients[i] + " "
 								+ (Math.round(prixTotalClient * 100.0) / 100.0) + "$";
-						System.out.println(lignesFactures[cptLignes]);
 						
 						cptLignes++;
 						
@@ -94,15 +92,14 @@ public class Facture {
 				
 				if (total > 100 || nbClientsTable >= 3) {
 					total += (total * 0.15) + (total * TPS) + (total * TVQ);
-					lignesFactures[cptLignes] = "Total : " + total;
+					lignesFactures[cptLignes] = "Total : " + (Math.round(total * 100.0) / 100.0) + "$";
 					cptLignes++;
-					System.out.println("Total : " + total);
+
 				} else {
 					
 					total += (total * TPS) + (total * TVQ);
-					lignesFactures[cptLignes] = "Total : " + total;
+					lignesFactures[cptLignes] = "Total : " + (Math.round(total * 100.0) / 100.0) + "$";
 					cptLignes++;
-					System.out.println("Total : " + total);
 					
 				}
 			}
@@ -115,7 +112,7 @@ public class Facture {
 	public void lignesFacture() {
 		
 		cptLignes = 0;
-		
+
 		for (int j = 0; j < tabErreurs.length; j++) {
 			if (tabErreurs[j] != null) {
 				lignesFactures[cptLignes] = tabErreurs[j];
@@ -123,41 +120,63 @@ public class Facture {
 			}
 		}
 		
-		// Faire les factures
-		for (int i = 0; i < cptClient; i++) {
-			
-			double prix = 0;
+		
+		for (int h = 0; h < tabTables.length; h++) {
+			if (tabTables[h] != 0) {
+				double total = 0;
+				int nbClientsTable = 0;
+				lignesFactures[cptLignes] = "Table " + tabTables[h];
+				cptLignes++;
+				for (int i = 0; i < cptClient; i++) {
+					
+					double prix = 0;
+					double prixTotalClient = 0;
+					
+					for (int j = 0; j < cptCommande; j++) {
 
-			for (int j = 0; j < cptCommande; j++) {
+						if (tabCommandes[j].getNoTable() == tabTables[h]) {
+							if (tabClients[i].equals(tabCommandes[j].getNomClient())) {
+								nbClientsTable++;
 
-				if (tabClients[i].equals(tabCommandes[j].getNomClient())) {
 
-					boolean trouve = false;
+								prix = trouverPrixPlat(tabCommandes[j].getNomPlat())
+										* tabCommandes[j].getQte();
+								prixTotalClient += trouverPrixPlat(tabCommandes[j].getNomPlat())
+										* tabCommandes[j].getQte();
+								total += prix;
 
-					for (int k = 0; k <= cptPlat && !trouve; k++) {
-
-						if (tabPlats[k].getNom().equals(
-								tabCommandes[j].getNomPlat())) {
-
-							prix += tabPlats[k].getPrix() * tabCommandes[j].getQte() + (tabPlats[k].getPrix() * tabCommandes[j].getQte())
-									* (TPS + TVQ);
-							trouve = true;
-
-						} else {
-
-							prix += 0;
-
+							}
 						}
+						
+						
+
+					}
+
+					
+					if (prix > 0) {
+						
+						getLignesFactures()[cptLignes] = tabClients[i] + " "
+								+ (Math.round(prixTotalClient * 100.0) / 100.0) + "$";
+						
+						cptLignes++;
+						
+
 					}
 
 				}
 				
-			}
-
-			if (prix > 0) {
-					getLignesFactures()[cptLignes] = tabClients[i] + " " + (Math.round(prix * 100.0) / 100.0) + "$";
+				if (total > 100 || nbClientsTable >= 3) {
+					total += (total * 0.15) + (total * TPS) + (total * TVQ);
+					lignesFactures[cptLignes] = "Total : " + (Math.round(total * 100.0) / 100.0) + "$";
 					cptLignes++;
 
+				} else {
+					
+					total += (total * TPS) + (total * TVQ);
+					lignesFactures[cptLignes] = "Total : " + (Math.round(total * 100.0) / 100.0) + "$";
+					cptLignes++;
+					
+				}
 			}
 			
 		}
