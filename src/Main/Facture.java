@@ -46,67 +46,70 @@ public class Facture {
 		}
 		
 		
-		// Faire les factures
-		
-		for (int i = 0; i < tabTables.length; i++) {
-			if (tabTables[i] != 0) {
-				System.out.println("Table" + tabTables[i]);
-				for (int j = 0; j < tabCommandes.length; j++) {
-					if (tabCommandes[j] != null) {
-						if (tabCommandes[j].getNoTable() == tabTables[i]) {
-							System.out.println(tabCommandes[j].getNomClient());
-							int prix = 0;
-							for (int k = 0; k < tabCommandes.length; k++) {
-								if (tabCommandes[k].getNomClient() == tabCommandes[i].getNomClient()) {
-									prix += tabCommandes[k].get
-								}
+		for (int h = 0; h < tabTables.length; h++) {
+			if (tabTables[h] != 0) {
+				double total = 0;
+				int nbClientsTable = 0;
+				lignesFactures[cptLignes] = "Table " + tabTables[h];
+				cptLignes++;
+				System.out.println("Table " + tabTables[h]);
+				for (int i = 0; i < cptClient; i++) {
+					
+					double prix = 0;
+					double prixTotalClient = 0;
+					
+					for (int j = 0; j < cptCommande; j++) {
+
+						if (tabCommandes[j].getNoTable() == tabTables[h]) {
+							if (tabClients[i].equals(tabCommandes[j].getNomClient())) {
+								nbClientsTable++;
+
+
+								prix = trouverPrixPlat(tabCommandes[j].getNomPlat())
+										* tabCommandes[j].getQte();
+								prixTotalClient += trouverPrixPlat(tabCommandes[j].getNomPlat())
+										* tabCommandes[j].getQte();
+								total += prix;
+
 							}
 						}
+						
+						
+
 					}
+
+					
+					if (prix > 0) {
+						
+						getLignesFactures()[cptLignes] = tabClients[i] + " "
+								+ (Math.round(prixTotalClient * 100.0) / 100.0) + "$";
+						System.out.println(lignesFactures[cptLignes]);
+						
+						cptLignes++;
+						
+
+					}
+
+				}
+				
+				if (total > 100 || nbClientsTable >= 3) {
+					total += (total * 0.15) + (total * TPS) + (total * TVQ);
+					lignesFactures[cptLignes] = "Total : " + total;
+					cptLignes++;
+					System.out.println("Total : " + total);
+				} else {
+					
+					total += (total * TPS) + (total * TVQ);
+					lignesFactures[cptLignes] = "Total : " + total;
+					cptLignes++;
+					System.out.println("Total : " + total);
+					
 				}
 			}
+			
 		}
-//		for (int i = 0; i < cptClient; i++) {
-//
-//			double prix = 0;
-//
-//			for (int j = 0; j < cptCommande; j++) {
-//
-//				if (tabClients[i].equals(tabCommandes[j].getNomClient())) {
-//
-//					boolean trouve = false;
-//
-//					for (int k = 0; k <= cptPlat && !trouve; k++) {
-//
-//						if (tabPlats[k].getNom().equals(
-//								tabCommandes[j].getNomPlat())) {
-//
-//							prix += tabPlats[k].getPrix()
-//									* tabCommandes[j].getQte()
-//									+ (tabPlats[k].getPrix() * tabCommandes[j]
-//											.getQte()) * (TPS + TVQ);
-//							trouve = true;
-//
-//						} else {
-//
-//							prix += 0;
-//
-//						}
-//					}
-//
-//				}
-//
-//			}
-//
-//			if (prix > 0) {
-//				getLignesFactures()[cptLignes] = tabClients[i] + " "
-//						+ (Math.round(prix * 100.0) / 100.0) + "$";
-//				cptLignes++;
-//
-//			}
-//
-//		}
-
+		
+		
 	}
 	
 	public void lignesFacture() {
@@ -404,7 +407,7 @@ public class Facture {
 		double prix = 0;
 		for (int i = 0; i < tabPlats.length; i++) {
 			if (tabPlats[i] != null) {
-				if (tabPlats[i].getNom() == nomPlat) {
+				if (tabPlats[i].getNom().equals(nomPlat) ) {
 					prix = tabPlats[i].getPrix();
 				}
 			}

@@ -3,6 +3,7 @@ Roger
 Céline
 Jean
 Steeve
+Paul
 Plats:
 Poutine 10.5
 Frites 2.5
@@ -12,4 +13,5 @@ Roger Poutine 1 1
 Jean Poutine 2 1
 Céline Frites 2 2
 Céline Repas_Poulet 1 2
+Paul Repas_Poulet 1 1
 Fin

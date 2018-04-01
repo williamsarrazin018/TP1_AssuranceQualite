@@ -22,7 +22,7 @@ public class Main {
 		
 		Facture facture = new Facture();
 		facture.gererCommandes(fichier);
-		facture.lignesFacture();
+		//facture.lignesFacture();
 		facture.ecrireFacture();
 		facture.factureTable();
 	}
