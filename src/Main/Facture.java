@@ -1,5 +1,7 @@
 package Main;
 
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
@@ -9,14 +11,26 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.io.File;
 
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 
-public class Facture {
 
+public class Facture extends JFrame {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public static String[] tabClients = new String[20];
 	public static Plat[] tabPlats = new Plat[20];
 	public static Commande[] tabCommandes = new Commande[20];
 	public static String[] tabErreurs = new String[20];
+	
+	private JButton lire = new JButton();
+	private JButton produire = new JButton();
+	private JLabel client,plat,qte,table;
 	
 	private static final double TPS = 0.05;
 	private static final double TVQ = 0.0975;
@@ -30,6 +44,24 @@ public class Facture {
 	private String[] lignesFactures = new String[20];
 
 	public Facture() {
+		super("Facture");
+		setSize(300,250);
+		getContentPane().setLayout(new GridBagLayout());
+		
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		client = new JLabel("Client");
+		plat = new JLabel("Plat");
+		qte  = new JLabel("Quantité");
+		table  = new JLabel("Table");
+		
+		GridBagConstraints gbc= new GridBagConstraints() ;
+		gbc.fill=GridBagConstraints.BOTH;
+		gbc.gridx=0;
+		gbc.gridy=0;
+		gbc.gridwidth=1;
+		gbc.gridheight=1;
+		gbc.weightx=1; gbc.weighty=1;
+		
 		
 		
 	}
