@@ -18,13 +18,14 @@ public class Main {
 		
 		System.out.println("Bienvenue chez Barette!\n");
 		
-		String fichier = ".\\commande.txt";
+		//String fichier = ".\\commande.txt";
 		
 		Facture facture = new Facture();
-		facture.gererCommandes(fichier);
-		facture.lignesFacture();
+		facture.setVisible(true);
+		//facture.gererCommandes(fichier);
+		//facture.lignesFacture();
 		//facture.factureTable();
-		facture.ecrireFacture();
+		//facture.ecrireFacture();
 		
 	}
 		
