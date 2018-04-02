@@ -19,7 +19,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-public class Facture extends JFrame {
+public class Facture extends JFrame implements ActionListener {
 
 	/**
 	 * 
@@ -30,8 +30,8 @@ public class Facture extends JFrame {
 	public static Commande[] tabCommandes = new Commande[20];
 	public static String[] tabErreurs = new String[20];
 
-	private JButton lire = new JButton();
-	private JButton produire = new JButton();
+	private JButton lire = new JButton("Lire");
+	private JButton produire = new JButton("Produire");
 	private JLabel client, plat, qte, table;
 	private JTextField clientText, platText, qteText, tableText;
 
@@ -124,6 +124,20 @@ public class Facture extends JFrame {
 		gbc.gridheight = 1;
 		gbc.ipadx = 100;
 		getContentPane().add(tableText, gbc);
+		
+		gbc.gridx = 0;
+		gbc.gridy = 4;
+		gbc.gridwidth = 3;
+		gbc.gridheight = 1;
+		gbc.ipadx = 0;
+		getContentPane().add(lire, gbc);
+		
+		gbc.gridx = 1;
+		gbc.gridy = 4;
+		gbc.gridwidth = 3;
+		gbc.gridheight = 1;
+		
+		getContentPane().add(produire, gbc);
 
 
 	}
