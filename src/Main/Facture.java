@@ -3,6 +3,8 @@ package Main;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
@@ -11,6 +13,8 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.io.File;
+
+
 
 
 
@@ -139,6 +143,7 @@ public class Facture extends JFrame implements ActionListener {
 		
 		getContentPane().add(produire, gbc);
 
+		lire.addActionListener(this);
 
 	}
 
@@ -470,6 +475,25 @@ public class Facture extends JFrame implements ActionListener {
 		}
 
 		return prix;
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		if (e.getSource() == lire){
+			String fichier = ".\\commande.txt";
+			gererCommandes(fichier);
+			
+			//clientText, platText, qteText, tableText;
+			clientText.setText(tabCommandes[0].getNomClient());
+			platText.setText(tabCommandes[0].getNomPlat());
+			qteText.setText(Integer.toString(tabCommandes[0].getQte()));
+			tableText.setText(Integer.toString(tabCommandes[0].getNoTable()));
+		} else if (e.getSource() == produire){
+		
+			
+		}
+		
 	}
 
 }
