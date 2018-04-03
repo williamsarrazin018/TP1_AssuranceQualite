@@ -22,10 +22,6 @@ public class Main {
 		
 		Facture facture = new Facture();
 		facture.setVisible(true);
-		//facture.gererCommandes(fichier);
-		//facture.lignesFacture();
-		//facture.factureTable();
-		//facture.ecrireFacture();
 		
 	}
 		

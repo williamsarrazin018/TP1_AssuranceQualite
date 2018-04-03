@@ -19,11 +19,14 @@ import java.io.File;
 
 
 
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+
+import com.sun.javafx.image.impl.IntArgb;
 
 public class Facture extends JFrame implements ActionListener {
 
@@ -38,7 +41,8 @@ public class Facture extends JFrame implements ActionListener {
 
 	private JButton lire = new JButton("Lire");
 	private JButton produire = new JButton("Produire");
-	private JLabel facture,confirmation;
+	private JLabel facture,confirmation, fichier;
+	private JTextField txtFic;
 	private JTextArea textArea;
 
 	private static final double TPS = 0.05;
@@ -54,13 +58,16 @@ public class Facture extends JFrame implements ActionListener {
 
 	public Facture() {
 		super("Facture");
-		setSize(400, 500);
+		setSize(500, 500);
 		getContentPane().setLayout(new GridBagLayout());
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		facture = new JLabel("Facture :");
-		textArea = new JTextArea(10,20);
+		textArea = new JTextArea(20,25);
+		textArea.setEditable(false);
 		confirmation = new JLabel("");
+		fichier = new JLabel("Fichier : ");
+		txtFic = new JTextField(8);
 		
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.fill = GridBagConstraints.CENTER;
@@ -82,19 +89,32 @@ public class Facture extends JFrame implements ActionListener {
 		getContentPane().add(textArea,gbc);
 		
 		gbc.gridx = 0;
+		gbc.gridy = 4;
+		gbc.gridwidth = 3;
+		gbc.gridheight = 1;
+		getContentPane().add(fichier, gbc);
+		
+		gbc.gridx = 0;
 		gbc.gridy = 5;
+		gbc.gridwidth = 3;
+		gbc.gridheight = 1;
+		getContentPane().add(txtFic, gbc);
+		
+		gbc.gridx = 0;
+		gbc.gridy = 6;
 		gbc.gridwidth = 3;
 		gbc.gridheight = 1;
 		getContentPane().add(lire, gbc);
 		
 		gbc.gridx = 1;
-		gbc.gridy = 5;
+		gbc.gridy = 6;
 		gbc.gridwidth = 3;
 		gbc.gridheight = 1;
+		produire.setEnabled(false);
 		getContentPane().add(produire, gbc);
 
 		gbc.gridx = 1;
-		gbc.gridy = 6;
+		gbc.gridy = 7;
 		gbc.gridwidth = 3;
 		gbc.gridheight = 1;
 		
@@ -394,6 +414,8 @@ public class Facture extends JFrame implements ActionListener {
 
 	public void ecrireFacture() {
 
+		textArea.setText("");
+		
 		BufferedWriter writer = null;
 		try {
 			String timeLog = new SimpleDateFormat("yyyyMMdd-HHmmss")
@@ -407,6 +429,7 @@ public class Facture extends JFrame implements ActionListener {
 					writer.write(lignesFactures[i] + "\n");
 					writer.newLine();
 					System.out.println(lignesFactures[i]);
+					textArea.setText(textArea.getText() + "\n" + lignesFactures[i] );
 				}
 			}
 		} catch (Exception e) {
@@ -420,6 +443,23 @@ public class Facture extends JFrame implements ActionListener {
 
 	}
 
+	public void reinitialiser() {
+		
+		tabClients = new String[20];
+		tabPlats = new Plat[20];
+		tabCommandes = new Commande[20];
+		tabErreurs = new String[20];
+		lignesFactures = new String[20];
+		cptLignes = 0;
+		cptErreurs = 0;
+		cptClient = 0;
+		cptPlat = 0;
+		cptCommande = 0;
+		cptTable = 0;
+		tabTables = new int[20];
+		
+	}
+	
 	public double trouverPrixPlat(String nomPlat) {
 		double prix = 0;
 		for (int i = 0; i < tabPlats.length; i++) {
@@ -437,20 +477,22 @@ public class Facture extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if (e.getSource() == lire){
-			String fichier = ".\\commande.txt";
-			gererCommandes(fichier);
 			
-			//clientText, platText, qteText, tableText;
-			textArea.setText("Nom : " + tabCommandes[0].getNomClient() +"\n"
-					+ "Plat : " + tabCommandes[0].getNomPlat() +"\n"
-					+ "Quantité : " + Integer.toString(tabCommandes[0].getQte()) +"\n"
-					+ "Numéro de table : " +Integer.toString(tabCommandes[0].getNoTable()));
+			if (!txtFic.getText().isEmpty()) {
+				String fichier = txtFic.getText();
+				gererCommandes(fichier);
+				confirmation.setText("Facture bien lu!");
+				produire.setEnabled(true);
+			}
+			
 					
-			confirmation.setText("Facture bien lu!");
+			
 		} else if (e.getSource() == produire){
-		
+			lignesFacture();
 			ecrireFacture();
 			confirmation.setText("Facture bien produite!");
+			produire.setEnabled(false);
+			reinitialiser();
 		}
 		
 	}

@@ -1,0 +1,11 @@
+William Sarrazin : 
+
+Spécifications : 
+
+----------------------------------------------------------------------------------------------------------------------------
+
+- Implémenter l'idée de tables dans le programme.  Et changer les méthodes pour que cela fonctionne avec.
+
+- Mettre à jour les tests pour que ça fonctionne avec les tables.
+
+- Faire une fiche de test pour un scénario d'utilisation.
