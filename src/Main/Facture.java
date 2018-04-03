@@ -18,9 +18,11 @@ import java.io.File;
 
 
 
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 public class Facture extends JFrame implements ActionListener {
@@ -36,8 +38,8 @@ public class Facture extends JFrame implements ActionListener {
 
 	private JButton lire = new JButton("Lire");
 	private JButton produire = new JButton("Produire");
-	private JLabel client, plat, qte, table;
-	private JTextField clientText, platText, qteText, tableText;
+	private JLabel facture,confirmation;
+	private JTextArea textArea;
 
 	private static final double TPS = 0.05;
 	private static final double TVQ = 0.0975;
@@ -52,19 +54,13 @@ public class Facture extends JFrame implements ActionListener {
 
 	public Facture() {
 		super("Facture");
-		setSize(250, 500);
+		setSize(400, 500);
 		getContentPane().setLayout(new GridBagLayout());
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		client = new JLabel("Client :");
-		plat = new JLabel("Plat :");
-		qte = new JLabel("Quantité :");
-		table = new JLabel("Table :");
-		
-		clientText = new JTextField("");
-		platText = new JTextField("");
-		qteText  = new JTextField("");
-		tableText = new JTextField("");
+		facture = new JLabel("Facture :");
+		textArea = new JTextArea(10,20);
+		confirmation = new JLabel("");
 		
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.fill = GridBagConstraints.CENTER;
@@ -76,75 +72,35 @@ public class Facture extends JFrame implements ActionListener {
 		gbc.weightx = 1;
 		gbc.weighty = 1;
 
-		getContentPane().add(client, gbc);
-
-	
+		getContentPane().add(facture,gbc);
+		
 		gbc.gridx = 1;
 		gbc.gridy = 0;
 		gbc.gridwidth = 3;
-		gbc.gridheight = 1;
-		gbc.ipadx = 100;
-		getContentPane().add(clientText, gbc);
+		gbc.gridheight = 4;
+		gbc.ipadx = 0;
+		getContentPane().add(textArea,gbc);
 		
 		gbc.gridx = 0;
-		gbc.gridy = 1;
+		gbc.gridy = 5;
 		gbc.gridwidth = 3;
 		gbc.gridheight = 1;
-		gbc.ipadx = 0;
-		getContentPane().add(plat, gbc);
-		
-		gbc.gridx = 1;
-		gbc.gridy = 1;
-		gbc.gridwidth = 3;
-		gbc.gridheight = 1;
-		gbc.ipadx = 100;
-		getContentPane().add(platText, gbc);
-		
-		gbc.gridx = 0;
-		gbc.gridy = 2;
-		gbc.gridwidth = 3;
-		gbc.gridheight = 1;
-		gbc.ipadx = 0;
-		getContentPane().add(qte, gbc);
-		
-		gbc.gridx = 1;
-		gbc.gridy = 2;
-		gbc.gridwidth = 3;
-		gbc.gridheight = 1;
-		gbc.ipadx = 100;
-		getContentPane().add(qteText, gbc);
-
-		
-		gbc.gridx = 0;
-		gbc.gridy = 3;
-		gbc.gridwidth = 3;
-		gbc.gridheight = 1;
-		gbc.ipadx = 0;
-		getContentPane().add(table, gbc);
-		
-		gbc.gridx = 1;
-		gbc.gridy = 3;
-		gbc.gridwidth = 3;
-		gbc.gridheight = 1;
-		gbc.ipadx = 100;
-		getContentPane().add(tableText, gbc);
-		
-		gbc.gridx = 0;
-		gbc.gridy = 4;
-		gbc.gridwidth = 3;
-		gbc.gridheight = 1;
-		gbc.ipadx = 0;
 		getContentPane().add(lire, gbc);
 		
 		gbc.gridx = 1;
-		gbc.gridy = 4;
+		gbc.gridy = 5;
+		gbc.gridwidth = 3;
+		gbc.gridheight = 1;
+		getContentPane().add(produire, gbc);
+
+		gbc.gridx = 1;
+		gbc.gridy = 6;
 		gbc.gridwidth = 3;
 		gbc.gridheight = 1;
 		
-		getContentPane().add(produire, gbc);
-
+		getContentPane().add(confirmation, gbc);
 		lire.addActionListener(this);
-
+		produire.addActionListener(this);
 	}
 
 	public void lignesFacture() {
@@ -485,13 +441,16 @@ public class Facture extends JFrame implements ActionListener {
 			gererCommandes(fichier);
 			
 			//clientText, platText, qteText, tableText;
-			clientText.setText(tabCommandes[0].getNomClient());
-			platText.setText(tabCommandes[0].getNomPlat());
-			qteText.setText(Integer.toString(tabCommandes[0].getQte()));
-			tableText.setText(Integer.toString(tabCommandes[0].getNoTable()));
+			textArea.setText("Nom : " + tabCommandes[0].getNomClient() +"\n"
+					+ "Plat : " + tabCommandes[0].getNomPlat() +"\n"
+					+ "Quantité : " + Integer.toString(tabCommandes[0].getQte()) +"\n"
+					+ "Numéro de table : " +Integer.toString(tabCommandes[0].getNoTable()));
+					
+			confirmation.setText("Facture bien lu!");
 		} else if (e.getSource() == produire){
 		
-			
+			ecrireFacture();
+			confirmation.setText("Facture bien produite!");
 		}
 		
 	}
