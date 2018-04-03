@@ -1,0 +1,14 @@
+Table 1
+
+Céline 15.75$
+
+William 13.0$
+
+Total : 37.3$
+
+Table 2
+
+Steeve 5.0$
+
+Total : 5.74$
+

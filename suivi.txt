@@ -9,6 +9,9 @@ William :
 - Modifier certaines parties du main pour le rendre plus optimisé (isolement en méthodes).
 - Faire les tests unitaires pour la création des factures.
 - Ré-usinage du code fait par Agustin.
+- Implémenter gestion des tables.
+- Adapter les méthodes pour les factures avec les numéros de tables.
+- Faire une fiche de test pour le scénario de la commande testErreurPlat.txt
 
 
 Agustin : 

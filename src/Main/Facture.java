@@ -26,7 +26,6 @@ import javax.swing.JLabel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import com.sun.javafx.image.impl.IntArgb;
 
 public class Facture extends JFrame implements ActionListener {
 
@@ -68,6 +67,7 @@ public class Facture extends JFrame implements ActionListener {
 		confirmation = new JLabel("");
 		fichier = new JLabel("Fichier : ");
 		txtFic = new JTextField(8);
+		txtFic.setText("commande.txt");
 		
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.fill = GridBagConstraints.CENTER;
@@ -479,6 +479,8 @@ public class Facture extends JFrame implements ActionListener {
 		if (e.getSource() == lire){
 			
 			if (!txtFic.getText().isEmpty()) {
+				reinitialiser();
+				textArea.setText("");
 				String fichier = txtFic.getText();
 				gererCommandes(fichier);
 				confirmation.setText("Facture bien lu!");
