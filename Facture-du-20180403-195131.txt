@@ -1,0 +1,8 @@
+Erreur quantité invalide : Steeve Frites -1 2
+
+Table 2
+
+Céline 20.75$
+
+Total : 23.81$
+
